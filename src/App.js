@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Alert from "./Alert";
+import Main from "./Main";
+
+export const AlertContext = React.createContext(); // 
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [alert, setAlert] = useState(false);
+
+  const toggleAlert = () => setAlert((prev) => !prev); 
+
+  return(
+    <AlertContext.Provider value={alert}>
+      <div className="container">
+        <Alert />
+        <Main toggle={toggleAlert}/>
+      </div> 
+    </AlertContext.Provider>
+  )
 }
 
 export default App;
